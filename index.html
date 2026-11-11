@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>TilakFitLab | Personal Training, Bodybuilding &amp; Online Coaching</title>
+    <meta
+      name="description"
+      content="TilakFitLab: personalised training, diet guidance, competition preparation and online fitness coaching, with a knowledge hub on anatomy, hypertrophy, nutrition and recovery."
+    />
+    <link rel="canonical" href="https://tilakfitlab.in/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Browser UI colour follows the active theme (updated again by the inline script below). -->
+    <meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#05070f" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Icons generated from the logo mark -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Twitter (replace og-image.jpg in /public whenever you like) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TilakFitLab" />
+    <meta property="og:title" content="TilakFitLab | Personal Training, Bodybuilding &amp; Online Coaching" />
+    <meta
+      property="og:description"
+      content="Personalised training, diet guidance, competition preparation and online coaching."
+    />
+    <meta property="og:url" content="https://tilakfitlab.in/" />
+    <meta property="og:image" content="https://tilakfitlab.in/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TilakFitLab" />
+    <meta
+      name="twitter:description"
+      content="Personalised training, diet guidance, competition preparation and online coaching."
+    />
+    <meta name="twitter:image" content="https://tilakfitlab.in/og-image.jpg" />
+
+    <!-- Set the theme class before first paint so there is no flash of the wrong theme. -->
+    <script>
+      (function () {
+        var dark = true;
+        try {
+          var stored = localStorage.getItem('tfl-theme');
+          if (stored === 'dark' || stored === 'light') {
+            dark = stored === 'dark';
+          } else if (window.matchMedia) {
+            dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          }
+        } catch (e) {
+          try {
+            dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          } catch (e2) {}
+        }
+        var root = document.documentElement;
+        root.classList.toggle('dark', dark);
+        root.style.colorScheme = dark ? 'dark' : 'light';
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', dark ? '#05070f' : '#f5f7fb');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      Netlify Forms detection: static, hidden twin of the React contact form.
+      Field names MUST match src/components/Contact.jsx and public/forms.html.
+    -->
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="purpose" />
+      <input type="text" name="package" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

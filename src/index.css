@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Theme tokens. Channels are space-separated RGB so Tailwind can apply
+   opacity (bg-bg/80, border-line/15 ...). Accent is sampled from the logo.
+   ------------------------------------------------------------------ */
+:root {
+  --c-bg: 245 247 251;
+  --c-surface: 255 255 255;
+  --c-soft: 233 237 245;
+  --c-fg: 10 18 48;
+  --c-muted: 72 83 117;
+  --c-line: 10 18 48;
+  --c-accent: 21 90 222;
+  --c-accent-strong: 21 90 222;
+  --header-h: 4.5rem;
+  color-scheme: light;
+}
+
+.dark {
+  --c-bg: 5 7 15;
+  --c-surface: 11 16 32;
+  --c-soft: 9 14 30;
+  --c-fg: 238 242 255;
+  --c-muted: 154 166 199;
+  --c-line: 255 255 255;
+  --c-accent: 91 149 255;
+  --c-accent-strong: 29 99 232;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* No scroll-padding here: sections use scroll-margin-top below (both would stack to 2x). */
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+    background-color: rgb(var(--c-bg));
+  }
+
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    min-width: 320px;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Anchored sections clear the sticky header. */
+  section[id] {
+    scroll-margin-top: var(--header-h);
+  }
+  /* Elements waiting to slide in sit off to the side; on phones that can widen the layout viewport
+     (body overflow-x:hidden does not stop it). `clip` contains it per section without breaking sticky. */
+  section,
+  footer {
+    overflow-x: clip;
+  }
+  #home {
+    scroll-margin-top: 0;
+  }
+
+  ::selection {
+    background: rgb(var(--c-accent) / 0.28);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-12;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  .font-display-up {
+    @apply font-display font-bold uppercase leading-[0.92] tracking-tight;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide transition-[background-color,border-color,color,box-shadow,opacity] duration-300 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-accent-strong text-white shadow-[0_10px_30px_-10px_rgb(var(--c-accent-strong)/0.75)] hover:bg-[#2a74f5];
+  }
+  .btn-ghost {
+    @apply border border-line/20 bg-transparent text-fg hover:border-accent/60 hover:bg-accent/10;
+  }
+  .btn-whatsapp {
+    @apply bg-whatsapp text-[#04210f] shadow-[0_10px_30px_-12px_rgba(37,211,102,0.8)] hover:brightness-105;
+  }
+
+  /* Form controls */
+  .field {
+    @apply w-full rounded-xl border border-line/20 bg-bg/60 px-4 py-3.5 text-base text-fg placeholder:text-muted/70 transition-[border-color,box-shadow,background-color] duration-200 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30;
+  }
+  .field[aria-invalid='true'] {
+    @apply border-red-500/80 focus:border-red-500 focus:ring-red-500/25;
+  }
+
+  /* Placeholder copy the owner still has to replace (anything wrapped in [brackets] in /src/data). */
+  .ph {
+    @apply italic text-muted underline decoration-accent/50 decoration-dashed underline-offset-4;
+  }
+
+  /* Static film grain: a tiny inline SVG noise tile, no animation, no network. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Intro media: fills the screen on landscape; on portrait phones the 16:9 clip is scaled up so the
+     logo stays large, and its top/bottom edges are feathered into the matching background. */
+  .intro-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-aspect-ratio: 1/1) {
+    .intro-media {
+      width: 140vw;
+      max-width: none;
+      /* A grid item wider than its cell aligns to the start, so centre it explicitly: (100vw - 140vw) / 2 */
+      justify-self: start;
+      margin-left: -20vw;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+    }
+  }
+
+  .hairline {
+    background: linear-gradient(90deg, rgb(var(--c-line) / 0.28), rgb(var(--c-line) / 0));
+  }
+}
+
+/* Smooth theme crossfade: applied only for the moment of toggling, and only to colours. */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    fill 0.4s ease,
+    stroke 0.4s ease !important;
+}
+
+/* Hide the scrollbar for the horizontal chip scroller */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reduced motion: everything stays visible and usable, nothing loops or glides. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
