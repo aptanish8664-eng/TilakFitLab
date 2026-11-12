@@ -18,14 +18,9 @@ export const site = {
     { id: 'contact', label: 'Contact' },
   ],
 
-  // ---------------------------------------------------------------------------
-  // WHATSAPP
-  // PLACEHOLDER NUMBER: replace with country code + number, digits only.
-  // Example for an Indian mobile: '919876543210'. Until then the buttons render and the link is
-  // well-formed, but it will not open a real chat.
-  // ---------------------------------------------------------------------------
+  // WhatsApp: country code + number, digits only. Every WhatsApp link on the site reads this.
   whatsapp: {
-    number: '91XXXXXXXXXX',
+    number: '919008183555',
     message:
       'Hello, I am interested in your fitness training programs. I would like to know more about your services.',
   },

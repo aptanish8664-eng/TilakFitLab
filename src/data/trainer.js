@@ -4,19 +4,19 @@
 
 export const trainer = {
   // ---- Hero ---------------------------------------------------------------
-  name: '[Trainer Name]',
+  name: 'N TILAK',
   designation: '[Professional Designation]',
   headline: 'Strength built on discipline',
   heroIntro:
     'Personalised training, structured coaching and honest guidance for bodybuilding and everyday fitness.',
 
   // ---- About --------------------------------------------------------------
-  fullName: '[Trainer Full Name]',
+  fullName: 'N TILAK',
 
   // PLACEHOLDER IMAGE: src/assets/images/trainer.jpg is a generated silhouette.
   // Overwrite that file (any of .jpg .png .webp .avif works) with the real photograph,
   // then set photoIsPlaceholder to false to hide the "Placeholder photo" tag.
-  photoAlt: 'Portrait of the TilakFitLab trainer',
+  photoAlt: 'Portrait of N TILAK',
   photoIsPlaceholder: true,
 
   background: [

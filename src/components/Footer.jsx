@@ -6,6 +6,7 @@ import { WhatsAppIcon } from './ui/BrandIcons';
 import { useContact } from '../context/ContactContext';
 import { packages } from '../data/pricing';
 import { site } from '../data/site';
+import { trainer } from '../data/trainer';
 import { buildWhatsAppUrl } from '../lib/whatsapp';
 import { scrollToId } from '../lib/utils';
 
@@ -72,7 +73,7 @@ export default function Footer() {
       <div className="border-t border-line/10">
         <div className="container-page flex flex-col items-center justify-between gap-4 py-6 pb-24 text-xs text-muted sm:flex-row sm:pb-6">
           <p>
-            &copy; {year} {site.brand}. All rights reserved.
+            &copy; {year} {site.brand} &middot; {trainer.name}. All rights reserved.
           </p>
           <button
             type="button"

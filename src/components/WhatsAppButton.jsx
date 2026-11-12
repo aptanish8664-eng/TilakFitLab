@@ -4,8 +4,6 @@ import { buildWhatsAppUrl } from '../lib/whatsapp';
 
 /**
  * Floating WhatsApp shortcut. The number comes from src/data/site.js.
- * NOTE: while that number is still the '91XXXXXXXXXX' placeholder the link is well-formed
- * but will not open a real chat.
  * The pulse ring is CSS-only and is switched off by the global reduced-motion rule.
  */
 export default function WhatsAppButton({ visible = true, hidden = false }) {
